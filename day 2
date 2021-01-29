@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+    
+        // Time complexity: O(n) we iterate twice over n indices
+        // Memory usage:    O(1) we cache LeftProduct in the output array
+        vector<int> output(nums.size());
+        // Store left product in output array to meet the O(1) data contraint
+        {
+            auto numsIt = nums.cbegin();
+            auto outputIt = output.begin();
+            auto const outputEnd = output.end();
+            (*outputIt) = 1;
+            outputIt++;
+            // We start one index from the start of the container as we've prefilled the first index with 1
+            for (; outputIt != outputEnd; outputIt++, numsIt++) 
+            {           
+                (*outputIt) = outputIt[-1] * (*numsIt);
+            }
+        }
+
+        // Now iterate again, from the back of the array calculating the right product as we go to
+        // combine with the existing left product to calcuate the final answer for that index
+        {
+            auto reverseIt = nums.crbegin();
+            auto const reverseEnd = nums.crend();
+            auto resultIt = output.rbegin();
+            auto const resultEnd = output.rend();
+            int rightProduct = 1;
+            int prevRight = (*reverseIt);
+            resultIt++;
+            reverseIt++;
+            // We start one index from the end of the container as the final output index already stores
+            // the leftProduct which is the correct answer for that index
+            for (;resultIt != resultEnd; resultIt++, reverseIt++) 
+            {
+                rightProduct *= prevRight;
+                prevRight = (*reverseIt);
+                (*resultIt) *= rightProduct;
+            }
+        }
+        
+        return output;
+    }
+};
