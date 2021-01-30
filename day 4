@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int arr[]={3, 4, -1, 1};
+    int size= sizeof(arr)/sizeof(arr[0]);
+    sort(arr, arr+size);
+    int min=1;
+
+    for(int i=0; i<size; i++){
+        if(arr[i]>min) break;
+        if(arr[i]==min) min=min+1;
+    }
+    cout<<min;
+    return 0;
+}
