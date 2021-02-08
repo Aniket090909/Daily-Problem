@@ -1,0 +1,31 @@
+#include<stdio.h> 
+
+int MaxSum(int a[], int n) 
+{ 
+  if(n<2)
+  {
+        return 1;
+  }
+ 
+  int in = a[0]; 
+  int ex = 0; 
+  int ex_new; 
+
+  for (int i = 1; i < n; i++) 
+  { 
+	ex_new = (in > ex)? in: ex; 
+  	in = ex + a[i]; 
+	ex = ex_new; 
+  } 
+
+
+    return ((in > ex)? in : ex); 
+} 
+
+int main() 
+{ 
+  int a[] = {2, 4, 6, 2, 5}; 
+  int n = sizeof(a) / sizeof(a[0]); 
+  printf("sum is %d and number of elements is %d", MaxSum(a, n)); 
+  return 0; 
+} 
