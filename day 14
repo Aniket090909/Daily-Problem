@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std; 
+
+int main() 
+{ 
+	int interval=500, i; 
+	double dir_x, dir_y, origin_dist, pi; 
+	int cir_points = 0, sq_points = 0; 
+
+	srand(time(NULL)); 
+
+	for (i = 0; i < (interval * interval); i++) { 
+
+		dir_x = double(rand() % (interval + 1)) / interval; 
+		dir_y = double(rand() % (interval + 1)) / interval; 
+
+		origin_dist = dir_x * dir_x + dir_y * dir_y; 
+		if (origin_dist <= 1) 
+			cir_points++; 
+
+		sq_points++; 
+		pi = double(4 * cir_points) / sq_points; 
+    } 
+	
+	cout << " Estimation of Pi = " << pi; 
+	return 0; 
+} 
